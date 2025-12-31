@@ -39,7 +39,7 @@ const NavBar = () => {
               </li>
               <li className="nav-item">
                 <NavLink
-                  to="/entertainment"
+                  to="/culture"
                   className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
                 >
                   Entertainment
@@ -47,7 +47,7 @@ const NavBar = () => {
               </li>
               <li className="nav-item">
                 <NavLink
-                  to="/general"
+                  to="/world"
                   className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
                 >
                   General
@@ -55,7 +55,7 @@ const NavBar = () => {
               </li>
               <li className="nav-item">
                 <NavLink
-                  to="/health"
+                  to="/lifeandstyle"
                   className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
                 >
                   Health
@@ -71,7 +71,7 @@ const NavBar = () => {
               </li>
               <li className="nav-item">
                 <NavLink
-                  to="/sports"
+                  to="/sport"
                   className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
                 >
                   Sports

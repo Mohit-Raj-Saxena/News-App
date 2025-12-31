@@ -20,13 +20,12 @@ const News = ({ country, category, pageSize, setProgress }) => {
       setPage(1); // reset page when category changes
 
       try {
-        let url = `https://gnews.io/api/v4/top-headlines?token=${process.env.REACT_APP_GNEWS_API}&lang=en&country=${country}&topic=${category}&max=${pageSize}&page=1`;
-        let res = await fetch(url);
+        let url = `https://content.guardianapis.com/search?q=${category}&section=${category === "general" ? "" : category}&page=1&page-size=${pageSize}&show-fields=thumbnail,trailText&api-key=${process.env.REACT_APP_GUARDIAN_API_KEY}`; let res = await fetch(url);
         if (!res.ok) throw new Error(`Error ${res.status}`);
         let parsedData = await res.json();
 
-        setArticles(parsedData.articles || []);
-        setTotalResults(parsedData.totalArticles || 0);
+        setArticles(parsedData.response.results || []);
+        setTotalResults(parsedData.response.total || 0);
       } catch (err) {
         console.error("Failed to fetch news:", err.message);
       }
@@ -44,13 +43,13 @@ const News = ({ country, category, pageSize, setProgress }) => {
   const fetchMoreData = async () => {
     let nextPage = page + 1;
     try {
-      let url = `https://gnews.io/api/v4/top-headlines?token=${process.env.REACT_APP_GNEWS_API}&lang=en&country=${country}&topic=${category}&max=${pageSize}&page=${nextPage}`;
+      let url = `https://content.guardianapis.com/search?q=${category}&section=${category === "general" ? "" : category}&page=${nextPage}&page-size=${pageSize}&show-fields=thumbnail,trailText&api-key=${process.env.REACT_APP_GUARDIAN_API_KEY}`;
       let res = await fetch(url);
       if (!res.ok) throw new Error(`Error ${res.status}`);
       let parsedData = await res.json();
 
-      setArticles(prev => prev.concat(parsedData.articles || []));
-      setTotalResults(parsedData.totalArticles || 0);
+      setArticles(prev => prev.concat(parsedData.response.results || []));
+      setTotalResults(parsedData.response.total || 0);
       setPage(nextPage);
     } catch (err) {
       console.error("Failed to load more news:", err.message);
@@ -76,13 +75,13 @@ const News = ({ country, category, pageSize, setProgress }) => {
               return (
                 <div className="col-md-4" key={`${element.url}-${index}`}>
                   <NewsItem
-                    title={element.title || ""}
-                    description={element.description || ""}
-                    imageUrl={element.image}   // GNews uses "image"
-                    newsUrl={element.url}
-                    author={element.source?.name || "Unknown"}
-                    date={element.publishedAt}
-                    source={element.source?.name}
+                    title={element.webTitle}
+                    description={element.fields?.trailText || ""}
+                    imageUrl={element.fields?.thumbnail}
+                    newsUrl={element.webUrl}
+                    author="The Guardian"
+                    date={element.webPublicationDate}
+                    source="The Guardian"
                   />
                 </div>
               )

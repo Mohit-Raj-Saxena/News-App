@@ -16,17 +16,18 @@ const App = () => {
         <NavBar />
         <LoadingBar height={3} color="#f11946" progress={progress} />
         <Routes>
-          <Route path="/" element={<News setProgress={setProgress} apiKey={apiKey} pageSize={pageSize} country="us" category="world" />} />
-          <Route path="/world" element={<News setProgress={setProgress} apiKey={apiKey} pageSize={pageSize} country="us" category="world" />} />
-          <Route path="/business" element={<News setProgress={setProgress} apiKey={apiKey} pageSize={pageSize} country="us" category="business" />} />
-          <Route path="/entertainment" element={<News setProgress={setProgress} apiKey={apiKey} pageSize={pageSize} country="us" category="entertainment" />} />
-          <Route path="/general" element={<News setProgress={setProgress} apiKey={apiKey} pageSize={pageSize} country="us" category="general" />} />
-          <Route path="/health" element={<News setProgress={setProgress} apiKey={apiKey} pageSize={pageSize} country="us" category="health" />} />
-          <Route path="/science" element={<News setProgress={setProgress} apiKey={apiKey} pageSize={pageSize} country="us" category="science" />} />
-          <Route path="/sports" element={<News setProgress={setProgress} apiKey={apiKey} pageSize={pageSize} country="us" category="sports" />} />
-          <Route path="/technology" element={<News setProgress={setProgress} apiKey={apiKey} pageSize={pageSize} country="us" category="technology" />} />
-          <Route path="*" element={<div style={{ textAlign: 'center', marginTop: '100px' }}>404 - Page not found</div>} />
+          <Route path="/" element={<News setProgress={setProgress} pageSize={pageSize} category="world" />} />
+          <Route path="/world" element={<News setProgress={setProgress} pageSize={pageSize} category="world" />} />
+          <Route path="/business" element={<News setProgress={setProgress} pageSize={pageSize} category="business" />} />
+          <Route path="/culture" element={<News setProgress={setProgress} pageSize={pageSize} category="culture" />} />
+          <Route path="/lifeandstyle" element={<News setProgress={setProgress} pageSize={pageSize} category="lifeandstyle" />} />
+          <Route path="/science" element={<News setProgress={setProgress} pageSize={pageSize} category="science" />} />
+          <Route path="/sport" element={<News setProgress={setProgress} pageSize={pageSize} category="sport" />} />
+          <Route path="/technology" element={<News setProgress={setProgress} pageSize={pageSize} category="technology" />} />
+
+          <Route path="*" element={<div style={{ textAlign: "center", marginTop: "100px" }}>404 - Page not found</div>} />
         </Routes>
+
       </Router>
     </div>
   );
